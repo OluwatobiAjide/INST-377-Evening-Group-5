@@ -2,92 +2,112 @@
   box-sizing: border-box;
 }
 .header {
- display: flex;
- flex-flow: row wrap;
- min-height: 56px;
- align-items: center;
- justify-content: space-between;
- background-color:#7D1056;
+  display: flex;
+  flex-flow: row wrap;
+  min-height: 56px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #7d1056;
 }
 
-.left, .middle, .right{
+.left,
+.middle,
+.right {
   flex-grow: 2;
 }
 
-.middle{
+.middle {
   text-align: center;
 }
-
 
 .item {
   font-size: 20px;
   padding: 16px;
   display: inline-block;
-  color: #3EC92E;
+  color: #3ec92e;
 }
 
-
-
-.box{
+.box {
   margin: 0 auto;
   width: 960px;
   max-width: 100%;
-  padding : 10px;
+  padding: 10px;
 }
 .wrapper {
   margin: 0 auto;
   background-color: #bdcaa8;
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
 
-#logo{
-    width: 100px;
-    height: 100px;
+#logo {
+  width: 100px;
+  height: 100px;
 }
 
-.content{
-    width: 100%;
-    height: 450px;
-    border: 1px solid;
-    padding: 50px; 
-    margin: 0 auto;
-    background-color: #1AC907;
+.content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 450px;
+  border: 1px solid;
+  padding: 10px;
+  background-color:#FF00F3;
 }
-label{
+.data{
+  background-color: #50FF00;
+}
+
+.data,
+#mapid {
+  width: 400px;
+  height: 400px;
+  border: 1px solid;
+  border-radius: 4px;
+  border-style: groove;
+  flex: 2;
+  padding: 1%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+/* Search Bar */
+label {
   font-weight: 600;
 }
-.custom-control{
+.custom-control {
   font-weight: normal;
 }
-.dropdown-toggle{
+.dropdown-toggle {
   padding-left: 10px;
   border-radius: 0px !important;
 }
 .dropdown.dropdown-lg .dropdown-menu {
   padding: 15px;
 }
-.input-group .form-control{
+.input-group .form-control {
   width: 100%;
   border-radius: 0.25rem !important;
 }
-.dropdown.dropdown-lg .dropdown-menu{
+.dropdown.dropdown-lg .dropdown-menu {
   min-width: 320px;
 }
-.dropdown-menu{
+.dropdown-menu {
   box-shadow: 1px 4px 8px -1px #c1c1c1;
 }
-.btn-group button{
-  color:#82FF75;
-  background-color:#3EC92E;
+.btn-group button {
+  color: #82ff75;
+  background-color: #3ec92e;
 }
 
-
+/* Mobile */
 @media screen and (max-width: 960px) {
   .header {
     flex-flow: column wrap-reverse;
-   }
-
-   
-    
   }
+
+  .content {
+    flex-direction: column;
+  }
+}

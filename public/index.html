@@ -18,6 +18,17 @@
       integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""
+    ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
@@ -43,9 +54,9 @@
             /></a>
           </div>
           <div class="middle">
-            <a href="index.html" class="item"><i class="fa fa-home"></i></a>
-            <a href="about.html"class="item">About</a>
-            <a href="doc.html"class="item"><i class="fa fa-file"></i></a>
+            <a href="index.html" class="item"><i class="fa fa-home"></i>Home</a>
+            <a href="about.html" class="item">About</a>
+            <a href="doc.html" class="item"><i class="fa fa-file"></i>Docs</a>
           </div>
           <div class="right">
             <div class="row">
@@ -181,10 +192,27 @@
           </div>
         </div>
         <div class="content">
-          testing
+          <div id="mapid"></div>
+          <div class= "data"><h1>Description</h1></div>
         </div>
         <div class="footer"></div>
       </div>
     </div>
+    <script>
+      var mymap = L.map("mapid").setView([38.9897, -76.9378], 13);
+      L.tileLayer(
+        "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
+        {
+          attribution:
+            'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          maxZoom: 18,
+          id: "mapbox/streets-v11",
+          tileSize: 512,
+          zoomOffset: -1,
+          accessToken:
+            "pk.eyJ1IjoidGFqaWRlIiwiYSI6ImNrOTdtaGl3MjA4MzEzZXByMjRzNWh3ZGEifQ.vVqCrdfxdkQ_XFENH2v7CA",
+        }
+      ).addTo(mymap);
+    </script>
   </body>
 </html>
