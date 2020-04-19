@@ -3,10 +3,6 @@ var app = express()
 var port = process.env.PORT || 8000
 app.use(express.static(__dirname + '/public'))
 
-app.get('/api', function(request, response) {
-  response.send('Hello World!')
-})
-
 app.listen(port, function() {
   console.log("Node app is running at localhost:" + port)
 }) 
