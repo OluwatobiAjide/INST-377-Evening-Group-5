@@ -47,6 +47,7 @@
   <body>
     <div class="box">
       <div class="wrapper">
+         <!-- header separated to 3 flex boxes -->
         <div class="header">
           <div class="left">
             <a href="index.html">
@@ -191,6 +192,7 @@
             </div>
           </div>
         </div>
+         <!-- conttent separated to 2 flex boxes -->
         <div class="content">
           <div id="mapid"></div>
           <div class= "data"><h1>Description</h1></div>
@@ -198,6 +200,7 @@
         <div class="footer"></div>
       </div>
     </div>
+    <!-- map -->
     <script>
       var mymap = L.map("mapid").setView([38.9897, -76.9378], 13);
       L.tileLayer(
