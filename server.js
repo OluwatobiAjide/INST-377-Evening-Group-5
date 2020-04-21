@@ -12,4 +12,4 @@ app.listen(port, function() {
 });
 
 //Connect to DB
-mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true } , ()=>console.log("Database Connected"));
+mongoose.connect('mongodb+srv://admin:snw1B9IdJvv0Ds0m@cluster0-ufrmk.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true } , ()=>console.log("Database Connected"));
