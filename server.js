@@ -1,7 +1,7 @@
 const express = require("express");
 const fetch = require("node-fetch");
-const sqlite3 = require("sqlite3").verbose();
-//const MongoClient = require('mongodb').MongoClient;
+//const sqlite3 = require("sqlite3").verbose();
+const MongoClient = require('mongodb').MongoClient;
 require("dotenv/config");
 var app = express();
 var port = process.env.PORT || 8000;
@@ -12,56 +12,56 @@ app.listen(port, function () {
 });
 
 //Connect to DB
-const db = new sqlite3.Database("./db/food_place.db", (err) => {
-  if (err) {
-    return console.error(err.message);
-  }
-  console.log("Connnected to the food_place database");
-});
+// const db = new sqlite3.Database("./db/food_place.db", (err) => {
+//   if (err) {
+//     return console.error(err.message);
+//   }
+//   console.log("Connnected to the food_place database");
+// });
 
+// db.serialize(()=>{
+//   db.run(
+//     "CREATE TABLE IF NOT EXISTS food_inspection(establishment_id integer  , name text , category text , inspection_date text, inspection_result text, city text, state text, zip integer, address_line_1 text, address_line_2 text, inspection_type text, owner text, establishment_type text )"
+//   );
 
+//   for (var key in data){
+//     var info = data[key];
+//     const param = [info.establishment_id, info.name , info.category , info.inspection_date , info.inspection_results , info.city , info.state , info.zip , info.address_line_1 , info.address_line_2 , info.inspection_type , info.owner , info.type]
+    
+//     const sql = "INSERT INTO food_inspection VALUES(:establishment_id, :name , :category , date(:inspection_date) ,:inspection_results, :city , :state , :zip , :address_line_1 , :address_line_2 , :inspection_type , :owner , :type)"
 
-db.ser
-const baseURL = "https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json";
-///const uri = "mongodb+srv://admin:snw1B9IdJvv0Ds0m@cluster0-ufrmk.mongodb.net/test?retryWrites=true&w=majority";
-fetch(baseURL)
+//     db.run(sql,param,(err)=>{
+//       if(err){
+//         return console.error(err.message);
+//       }
+      
+//     });
+    
+    
+//   }
+ 
+//   console.log("Insert Complete");
+  
+// });
+// db.close();
+const baseURL = "https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json?$limit=36000";
+const uri = "mongodb+srv://admin:snw1B9IdJvv0Ds0m@cluster0-ufrmk.mongodb.net/test?retryWrites=true&w=majority";
+ fetch(baseURL)
   .then((r) => r.json())
   .then((data) => {
-    console.log(data.length)
-    db.serialize(()=>{
-      db.run(
-        "CREATE TABLE IF NOT EXISTS food_inspection(establishment_id integer  , name text , category text , inspection_date text, inspection_result text, city text, state text, zip integer, address_line_1 text, address_line_2 text, inspection_type text, owner text, establishment_type text )"
-      );
-    
-      for (var key in data){
-        var info = data[key];
-        const param = [info.establishment_id, info.name , info.category , info.inspection_date , info.inspection_results , info.city , info.state , info.zip , info.address_line_1 , info.address_line_2 , info.inspection_type , info.owner , info.type]
-        
-        const sql = "INSERT INTO food_inspection VALUES(:establishment_id, :name , :category , date(:inspection_date) ,:inspection_results, :city , :state , :zip , :address_line_1 , :address_line_2 , :inspection_type , :owner , :type)"
-
-        db.run(sql,param,(err)=>{
-          if(err){
-            return console.error(err.message);
-          }
-          
+   
+     MongoClient.connect(uri, { useNewUrlParser: true },{ useUnifiedTopology: true },(err,client) => {
+      if  (err) {
+        console.error(err);
+        return;
+      }
+      const db = client.db('data')
+      const collection = db.collection('restaurant')
+        collection.insertMany(data,function(err, res) {
+          if (err) throw err;
+          console.log("Number of documents inserted: " + res.insertedCount);
+          client.close();
         });
         
-        
-      }
-     
-      console.log("Insert Complete");
-      
     });
-    db.close();
-    // MongoClient.connect(uri, { useNewUrlParser: true },{ useUnifiedTopology: true },(err,client) => {
-    //   if  (err) {
-    //     console.error(err);
-    //     return;
-    //   }
-    //   const db = client.db('data')
-    //   const collection = db.collection('restaurant')
-    //   data.forEach(function(item){
-    //       collection.insertOne(item);
-    //   });
-    // });
   });
