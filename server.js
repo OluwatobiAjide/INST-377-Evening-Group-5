@@ -44,8 +44,9 @@ app.listen(port, function () {
   
 // });
 // db.close();
+
 const baseURL = "https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json?$limit=36000";
-const uri = "mongodb+srv://admin:snw1B9IdJvv0Ds0m@cluster0-ufrmk.mongodb.net/test?retryWrites=true&w=majority";
+const uri = process.env.MONGODB_URL;
  fetch(baseURL)
   .then((r) => r.json())
   .then((data) => {
