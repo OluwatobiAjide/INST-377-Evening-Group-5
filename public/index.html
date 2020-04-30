@@ -66,11 +66,12 @@
                   <input
                     type="text"
                     class="form-control form-control-search"
+                    id = "search"
                     placeholder="Search"
                   />
                   <div class="input-group-btn">
-                    <div class="btn-group" role="group">
-                      <div class="dropdown dropdown-lg">
+                    <div class="btn-group " role="group">
+                      <div class="dropdown dropdown-lg"  >
                         <button
                           type="button"
                           class="btn btn-lg btn-secondary dropdown-toggle dropdown-toggle-split"
@@ -79,7 +80,7 @@
                           aria-expanded="false"
                         ></button>
                         <div
-                          class="dropdown-menu dropdown-menu-right"
+                          class="dropdown-menu dropdown-menu-right "
                           role="menu"
                         >
                           <form>
@@ -119,12 +120,10 @@
                              
                             </div>
                             
-                            <hr />
-                            
                           </form>
                         </div>
                       </div>
-                      <button type="submit" class="btn btn-primary">
+                      <button id= "searchB"type="submit" class="btn btn-primary">
                         <span class="fa fa-search" aria-hidden="true"></span>
                       </button>
                     </div>
@@ -158,6 +157,8 @@
             "pk.eyJ1IjoidGFqaWRlIiwiYSI6ImNrOTdtaGl3MjA4MzEzZXByMjRzNWh3ZGEifQ.vVqCrdfxdkQ_XFENH2v7CA",
         }
       ).addTo(mymap);
+        document.getElementById("searchB").addEventListener("click",() => {console.log(document.getElementById("search").value)});
+        
     </script>
   </body>
 </html>

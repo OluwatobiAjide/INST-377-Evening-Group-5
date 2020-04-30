@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
 /* eslint-disable linebreak-style */
 /* eslint-disable no-console */
 const express = require('express');
@@ -10,29 +12,33 @@ const app = express();
 const port = process.env.PORT || 8000;
 app.use(express.static(`${__dirname}/public`));
 
+
 app.listen(port, () => {
   console.log(`Node app is running at localhost:${port}`);
 });
 
 const baseURL = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json?$limit=36000';
 const uri = process.env.MONGODB_URL;
+
 fetch(baseURL)
   .then((r) => r.json())
   .then((data) => {
     MongoClient.connect(uri, { useNewUrlParser: true },
-      { useUnifiedTopology: true }, (err, client) => {
+      { useUnifiedTopology: true }, async (err, client) => {
         if (err) {
           console.error(err);
           return;
         }
-        const db = client.db('data');
-        const collection = db.collection('restaurant');
-        
-        collection.insertMany(data, (error, res) => {
+        const db = await client.db('data');
+        const collection = await db.collection('restaurant');
+        const filtered = data.filter((key) => (key.category === 'Restaurant' || key.category === 'Carry-out'
+           || key.category === 'Fast Food'));
+        collection.insertMany(filtered, (error, result) => {
           if (error) throw error;
-          console.log(`Number of documents inserted: ${res.insertedCount}`);
+          console.log(result.insertedCount);
           client.close();
         });
+        console.log(new Date(data[0].inspection_date).getFullYear());
       });
   });
 

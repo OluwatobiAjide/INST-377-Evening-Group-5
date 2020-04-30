@@ -91,7 +91,8 @@ label {
   border-radius: 0.25rem !important;
 }
 .dropdown.dropdown-lg .dropdown-menu {
-  min-width: 320px;
+  max-width: 200px;
+  max-height: 165px;
 }
 .dropdown-menu {
   box-shadow: 1px 4px 8px -1px #c1c1c1;
@@ -104,8 +105,9 @@ label {
 /* Mobile */
 @media screen and (max-width: 960px) {
   .header {
-    flex-flow: column wrap-reverse;
+    flex-flow: column nowrap;
   }
+
 
   .content {
     flex-direction: column;
