@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="icon" type="image/gif" href="animated_favicon1.gif" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -47,7 +49,7 @@
   <body>
     <div class="box">
       <div class="wrapper">
-         <!-- header separated to 3 flex boxes -->
+        <!-- header separated to 3 flex boxes -->
         <div class="header">
           <div class="left">
             <a href="index.html">
@@ -66,12 +68,12 @@
                   <input
                     type="text"
                     class="form-control form-control-search"
-                    id = "search"
+                    id="search"
                     placeholder="Search"
                   />
                   <div class="input-group-btn">
-                    <div class="btn-group " role="group">
-                      <div class="dropdown dropdown-lg"  >
+                    <div class="btn-group" role="group">
+                      <div class="dropdown dropdown-lg">
                         <button
                           type="button"
                           class="btn btn-lg btn-secondary dropdown-toggle dropdown-toggle-split"
@@ -80,7 +82,7 @@
                           aria-expanded="false"
                         ></button>
                         <div
-                          class="dropdown-menu dropdown-menu-right "
+                          class="dropdown-menu dropdown-menu-right"
                           role="menu"
                         >
                           <form>
@@ -94,7 +96,7 @@
                                 <option>Address</option>
                               </select>
                             </div>
-                           
+
                             <div class="form-group">
                               <label>Result Type</label><br />
                               <label class="custom-control custom-checkbox">
@@ -117,13 +119,15 @@
                                   >Safety Level</span
                                 >
                               </label>
-                             
                             </div>
-                            
                           </form>
                         </div>
                       </div>
-                      <button id= "searchB"type="submit" class="btn btn-primary">
+                      <button
+                        id="searchB"
+                        type="submit"
+                        class="btn btn-primary"
+                      >
                         <span class="fa fa-search" aria-hidden="true"></span>
                       </button>
                     </div>
@@ -133,10 +137,10 @@
             </div>
           </div>
         </div>
-         <!-- conttent separated to 2 flex boxes -->
+        <!-- conttent separated to 2 flex boxes -->
         <div class="content">
           <div id="mapid"></div>
-          <div class= "data"><h1>Description</h1></div>
+          <div class="data"><h1>Description</h1></div>
         </div>
         <div class="footer"></div>
       </div>
@@ -157,8 +161,9 @@
             "pk.eyJ1IjoidGFqaWRlIiwiYSI6ImNrOTdtaGl3MjA4MzEzZXByMjRzNWh3ZGEifQ.vVqCrdfxdkQ_XFENH2v7CA",
         }
       ).addTo(mymap);
-        document.getElementById("searchB").addEventListener("click",() => {console.log(document.getElementById("search").value)});
-        
+      document.getElementById("searchB").addEventListener("click", () => {
+        console.log(document.getElementById("search").value);
+      });
     </script>
   </body>
 </html>
