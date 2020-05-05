@@ -5,3 +5,6 @@
 
 
     People can use zip code to search restaurants that they want to go within Prince George’s area. Then the result will tell them the safety level of the restaurants based on a three level color rating. 
+    First, in our website, they can enter the zip code which they want to be located. Then below the search bar, there is map which can show you the resturants in that location. 
+    
+    ##They can choose which resturant they want to go??##
