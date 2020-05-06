@@ -73,10 +73,4 @@ app.route('/api').get((req, res) => {
   const result = db.run('SELECT * From food_inspection');
   res.send(result);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 });
-=======
->>>>>>> 6436cddc9590aa61b5a613063e9e3688460bd991
-=======
->>>>>>> 6436cddc9590aa61b5a613063e9e3688460bd991
