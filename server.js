@@ -70,8 +70,3 @@ fetch(baseURL)
     db.close();
   });
 
-  app.post('/api/post', (req, res) => {
-    res.json({
-      message: 'POST'
-    });
-  });
