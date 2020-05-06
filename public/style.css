@@ -108,8 +108,9 @@ label {
     flex-flow: column nowrap;
   }
 
+  
 
   .content {
-    flex-direction: column;
+   flex-direction: column-reverse;
   }
 }
