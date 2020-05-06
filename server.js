@@ -24,6 +24,9 @@ const db = new sqlite3.Database('./db/food_place.db', (err) => {
   console.log('Connnected to the food_place database');
 });
 
+app.route("/api").put((req,res) =>){
+  
+}
 fetch(baseURL)
   .then((r) => r.json())
   .then((data) => {
