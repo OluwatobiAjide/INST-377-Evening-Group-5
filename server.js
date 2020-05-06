@@ -24,9 +24,24 @@ const db = new sqlite3.Database('./db/food_place.db', (err) => {
   console.log('Connnected to the food_place database');
 });
 
-app.route("/api").put((req,res) =>){
-  
-}
+app.route("/api").put((req,res) =>{
+  console.log("/api put request", req.body);
+  if(req.body.name){
+    writeUser(req.body.name,db)
+    .then((result)=> {
+      console.log(result);
+      res.json({"success": true})
+    })
+    .catch((err) => {
+      console.log(err);
+      res.redirect('/error');
+    })
+  }else{
+  console.log(req.body);
+  res.status("418")
+  }
+});
+
 fetch(baseURL)
   .then((r) => r.json())
   .then((data) => {
@@ -71,4 +86,16 @@ fetch(baseURL)
       console.log('Insert Complete');
     });
     db.close();
+  });
+
+  app.post('/api/post', (req, res) => {
+    res.json({
+      message: 'POST'
+    });
+  });
+  
+  app.put('/api/put', (req, res) => { 
+    res.json({  
+      message: 'PUT'  
+    });  
   });
