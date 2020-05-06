@@ -22,43 +22,7 @@ const db = new sqlite3.Database('./db/food_place.db', (err) => {
     return console.error(err.message);
   }
   console.log('Connnected to the food_place database');
-});
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-app.route("/api").put((req,res) => {
-
-)}
-=======
-=======
->>>>>>> ba5f45e5bc148effec4bda29529abb77282bff57
-app.route("/api").put((req,res) =>{
-  console.log("/api put request", req.body);
-  if(req.body.name){
-    writeUser(req.body.name,db)
-    .then((result)=> {
-      console.log(result);
-      res.json({"success": true})
-    })
-    .catch((err) => {
-      console.log(err);
-      res.redirect('/error');
-    })
-  }else{
-  console.log(req.body);
-  res.status("418")
-  }
-});
-<<<<<<< HEAD
->>>>>>> 24605592b73b7dbe7e0fd6b5d6bdea13d005c14f
-=======
->>>>>>> ba5f45e5bc148effec4bda29529abb77282bff57
-=======
-app.route("/api").put((req,res) =>{
-
-});
->>>>>>> 0051a640fc8d35717eddaa5f4057a49111fba908
 
 fetch(baseURL)
   .then((r) => r.json())
@@ -106,25 +70,8 @@ fetch(baseURL)
     db.close();
   });
 
-<<<<<<< HEAD
   app.post('/api/post', (req, res) => {
     res.json({
       message: 'POST'
     });
   });
-  
-<<<<<<< HEAD
-  app.put('/api/put', (req, res) => { 
-    res.json({  
-      message: 'PUT'  
-=======
-  
-  
-  app.put('/api/put', (req, res) => { 
-    res.json({
-      message: 'PUT' 
->>>>>>> ba5f45e5bc148effec4bda29529abb77282bff57
-    });  
-  });
-=======
->>>>>>> 0051a640fc8d35717eddaa5f4057a49111fba908
