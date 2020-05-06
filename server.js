@@ -22,6 +22,7 @@ const db = new sqlite3.Database('./db/food_place.db', (err) => {
     return console.error(err.message);
   }
   console.log('Connnected to the food_place database');
+});
 
 
 fetch(baseURL)
@@ -67,11 +68,23 @@ fetch(baseURL)
 
       console.log('Insert Complete');
     });
-    db.close();
   });
+app.route('/api').get((req, res) => {
+  const result = db.run('SELECT * From food_inspection');
+  res.send(result);
 
+<<<<<<< HEAD
   app.post('/api/post', (req, res) => {
     res.json({
       message: 'POST'
     });
   });
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+});
+=======
+>>>>>>> 6436cddc9590aa61b5a613063e9e3688460bd991
+=======
+>>>>>>> 6436cddc9590aa61b5a613063e9e3688460bd991
+>>>>>>> ea324108f58daa1a2e8b722c520c1419cf2578b3
