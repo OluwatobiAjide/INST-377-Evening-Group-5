@@ -146,7 +146,6 @@
     </div>
     <!-- map -->
     <script>
-
       var mymap = L.map("mapid").setView([38.9897, -76.9378], 13);
       L.tileLayer(
         "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
@@ -162,8 +161,26 @@
         }
       ).addTo(mymap);
 
-        
+     async  function getInfo() {
+        const searchBar = document.querySelector("#search");
 
+        await fetch("/api",{
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).then((data)=>data.json()).then((res)=>{
+            for (key in res){
+              if (res[key].zip === searchBar){
+                const name = res[key].name;
+                const result = res[key].inspection_results;
+              }
+            }
+        })
+      }
+      const btn = document.querySelector('#searchB');
+      btn.addEventListener('click',getInfo);
+      //const options = document.querySelector("#category");
     </script>
   </body>
 </html>
