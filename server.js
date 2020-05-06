@@ -26,6 +26,7 @@ const db = new sqlite3.Database('./db/food_place.db', (err) => {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 app.route("/api").put((req,res) => {
 
 )}
@@ -53,6 +54,11 @@ app.route("/api").put((req,res) =>{
 >>>>>>> 24605592b73b7dbe7e0fd6b5d6bdea13d005c14f
 =======
 >>>>>>> ba5f45e5bc148effec4bda29529abb77282bff57
+=======
+app.route("/api").put((req,res) =>{
+
+});
+>>>>>>> 0051a640fc8d35717eddaa5f4057a49111fba908
 
 fetch(baseURL)
   .then((r) => r.json())
@@ -100,6 +106,7 @@ fetch(baseURL)
     db.close();
   });
 
+<<<<<<< HEAD
   app.post('/api/post', (req, res) => {
     res.json({
       message: 'POST'
@@ -119,3 +126,5 @@ fetch(baseURL)
 >>>>>>> ba5f45e5bc148effec4bda29529abb77282bff57
     });  
   });
+=======
+>>>>>>> 0051a640fc8d35717eddaa5f4057a49111fba908
