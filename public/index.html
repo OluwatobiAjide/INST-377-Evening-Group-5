@@ -163,6 +163,25 @@
         }
       ).addTo(mymap);
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+  function loadOption(){
+      const searchBar = document.querySelector("#search");
+      const options = document.querySelector("#category");
+      fetch("/api", {
+        method: "PUT",
+        headers: {
+          "Content-Type":
+          "application/json",
+        },
+        body: JSON.stringify({
+          
+        })
+      })
+=======
+=======
+>>>>>>> ba5f45e5bc148effec4bda29529abb77282bff57
+      
       function loadData(inputs) {
     console.log('fetch'); 
     fetch('/api')
@@ -173,23 +192,15 @@
         myList(res);
         console.log(res); 
     });
+>>>>>>> 24605592b73b7dbe7e0fd6b5d6bdea13d005c14f
 }
 
-function loadOption(){
-    var data= document.getElementById("search")               
-    if (data.value === "") {
-        alert("Please enter a city or zip");
-    } else {
-        if (data.placeholder === "akjdhglkja"){
-            loadData(data.value);
-            loadMap(data.value);
-        }else{
-            loadData(data.value);
-            loadMap(data.value);
-        }
 
-    }
+function loadMap(){
+  
 }
+<<<<<<< HEAD
+=======
 
 function myList(res) {
     document.querySelector('.content_test').innerHTML = '';
@@ -205,6 +216,10 @@ function myList(res) {
         document.querySelector('.content_test').appendChild(ul);
         }
 
+function loadMap(){
+  
+}
+>>>>>>> ba5f45e5bc148effec4bda29529abb77282bff57
       
     </script>
   </body>
