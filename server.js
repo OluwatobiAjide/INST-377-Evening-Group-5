@@ -74,6 +74,9 @@ app.route('/api').get((req, res) => {
   res.send(result);
 
 <<<<<<< HEAD
+});
+=======
+<<<<<<< HEAD
   app.post('/api/post', (req, res) => {
     res.json({
       message: 'POST'
@@ -88,3 +91,4 @@ app.route('/api').get((req, res) => {
 =======
 >>>>>>> 6436cddc9590aa61b5a613063e9e3688460bd991
 >>>>>>> ea324108f58daa1a2e8b722c520c1419cf2578b3
+>>>>>>> 6ebd1b30c13ec28a383d2b164af1e6c202a0267d
