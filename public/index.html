@@ -140,7 +140,13 @@
         <div class="content">
           <div id="mapid"></div>
           <div class="data" id="Description">
-            <ul id="UL"></ul>
+            <table style="width:100%" id = "tb">
+              <tr>
+                <th>Name</th>
+                <th>Testing</th>
+              </tr>
+              <tr id = "TR">
+              </tr>
           </div>
         </div>
         <div class="footer"></div>
@@ -175,16 +181,19 @@
         })
           .then((data) => data.json())
           .then((res) => {
-            var dataul = document.getElementById("UL");
+            var dataul = document.getElementById("TR");
             for (key in res) {
               if (res[key].zip === searchBar.value) {
                 const name = res[key].name;
                 const result = res[key].inspection_results;
 
-                var dataname = document.createElement("li");
-                var datalist = document.createTextNode(name + result);
-                dataname.appendChild(datalist);
-                dataul.appendChild(dataname);
+                var dataname = document.createElement("td");
+                var dataresult = document.createElement("td")
+                var datalist1 = document.createTextNode(name);
+                var datalist2 = document.createTextNode(result);
+                dataname.appendChild(datalist1);
+                dataresult.appendChild(datalist2);
+                dataul.appendChild(dataname+dataresult); 
               }
             }
           });
