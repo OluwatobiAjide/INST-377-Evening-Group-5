@@ -102,6 +102,9 @@ label {
   background-color: #3ec92e;
 }
 
+.data{
+    overflow: scroll;
+}
 /* Mobile */
 @media screen and (max-width: 960px) {
   .header {
@@ -113,4 +116,6 @@ label {
   .content {
    flex-direction: column-reverse;
   }
+
+  
 }

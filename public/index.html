@@ -139,8 +139,8 @@
         <!-- conttent separated to 2 flex boxes -->
         <div class="content">
           <div id="mapid"></div>
-          <div class="data" id = "Description">
-            <ul id = "UL"></ul>
+          <div class="data" id="Description">
+            <ul id="UL"></ul>
           </div>
         </div>
         <div class="footer"></div>
@@ -163,34 +163,34 @@
         }
       ).addTo(mymap);
 
-
-     async  function getInfo() {
+      function getInfo() {
         const searchBar = document.querySelector("#search");
-        const description = document.querySelector('#Description');
+        //const description = document.querySelector("#Description");
 
-        await fetch("/api",{
+        fetch("/api", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
-        }).then((data)=>data.json()).then((res)=>{
-          var dataul = document.getElementById("UL");
-            for (key in res){
-              if (res[key].zip === searchBar){
+        })
+          .then((data) => data.json())
+          .then((res) => {
+            var dataul = document.getElementById("UL");
+            for (key in res) {
+              if (res[key].zip === searchBar.value) {
                 const name = res[key].name;
                 const result = res[key].inspection_results;
 
                 var dataname = document.createElement("li");
-                var datalist = document.createTextNode(name+result);
+                var datalist = document.createTextNode(name + result);
                 dataname.appendChild(datalist);
                 dataul.appendChild(dataname);
-                
               }
             }
-        })
+          });
       }
-      const btn = document.querySelector('#searchB');
-      btn.addEventListener('click',getInfo);
+      const btn = document.querySelector("#searchB");
+      btn.addEventListener("click", getInfo);
       //const options = document.querySelector("#category");
     </script>
   </body>
