@@ -10,6 +10,8 @@ require('dotenv/config');
 
 const app = express();
 const port = process.env.PORT || 8000;
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
 
 app.listen(port, () => {
@@ -40,21 +42,23 @@ fetch(baseURL)
         });
       });
   });
-app.route('/api').get((req, res) => {
-  console.log('get request');
+app.route('/api').put((req, res) => {
+  console.log(req.body);
   MongoClient.connect(uri, { useNewUrlParser: true }, async (err, client) => {
     if (err) throw err;
-
     const db = client.db('data');
-
-    await db.collection('restaurant').find({}).toArray().then((data) => {
-      res.send(data);
-    })
-      .catch((error) => {
-        console.log(error);
+    if (req.body.category === 'Zip Code' && req.body.searchBar.match(/^\d{1,5}$/)) {
+      await db.collection('restaurant').find({ zip: req.body.searchBar }).toArray().then((data) => {
+        res.send(data);
       })
-      .finally(() => {
-        client.close();
-      });
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          client.close();
+        });
+    } else {
+      console.log('error');
+    }
   });
 });
