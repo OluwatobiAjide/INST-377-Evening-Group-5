@@ -139,14 +139,7 @@
         <!-- conttent separated to 2 flex boxes -->
         <div class="content">
           <div id="mapid"></div>
-          <div class="data" id="Description">
-            <table style="width:100%" id = "tb">
-              <tr>
-                <th>Name</th>
-                <th>Testing</th>
-              </tr>
-              <tr id = "TR">
-              </tr>
+          <div class="data" id="description">
           </div>
         </div>
         <div class="footer"></div>
@@ -181,21 +174,35 @@
         })
           .then((data) => data.json())
           .then((res) => {
-            var dataul = document.getElementById("TR");
+            var table = document.createElement("table");
+            table.className="gridtable";
+            var thead = document.createElement("thead");
+            var tbody = document.createElement("tbody");
+            var headRow = document.createElement("tr");
+            ["Name","Result"].forEach((el)=>{
+              var th=document.createElement("th");
+              th.appendChild(document.createTextNode(el));
+              headRow.appendChild(th);
+            });
+            thead.appendChild(headRow);
+            table.appendChild(thead);
             for (key in res) {
+
               if (res[key].zip === searchBar.value) {
+                var tr = document.createElement("tr");
                 const name = res[key].name;
                 const result = res[key].inspection_results;
-
-                var dataname = document.createElement("td");
-                var dataresult = document.createElement("td")
-                var datalist1 = document.createTextNode(name);
-                var datalist2 = document.createTextNode(result);
-                dataname.appendChild(datalist1);
-                dataresult.appendChild(datalist2);
-                dataul.appendChild(dataname+dataresult); 
+                var td1 = document.createElement("td");
+                var td2 = document.createElement("td");
+                td1.appendChild(document.createTextNode(name));
+                td2.appendChild(document.createTextNode(result));
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                tbody.appendChild(tr);
               }
+              table.appendChild(tbody);
             }
+            document.getElementById("description").appendChild(table);
           });
       }
       const btn = document.querySelector("#searchB");
