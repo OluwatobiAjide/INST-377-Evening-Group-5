@@ -199,6 +199,12 @@
         }
         document.getElementById("description").appendChild(table);
       }
+      function swap(arr) {
+        var tmp = arr[1];
+        arr[1] = arr[0];
+        arr[0] = tmp;
+        return arr;
+      }
       function renderInfo(res) {
         var table = document.createElement("table");
         table.className = "gridtable";
@@ -270,10 +276,11 @@
             ) {
               res = res.sort(custom_sort);
               renderInfo([res[res.length - 1]]);
-              var popup = L.popup()
-                .setLatLng(res[res.length - 1].geocoded_column_1.coordinates)
-                .setContent(res[res.length - 1].name)
-                .openOn(mymap);
+              L.marker(swap(res[res.length - 1].geocoded_column_1.coordinates))
+                .addTo(mymap)
+                .bindPopup(res[res.length - 1].name)
+                .openPopup();
+           
             } else if (
               (category.value === "Restaurant Name" ||
                 category.value === "Address") &&
@@ -284,10 +291,10 @@
               res = res.sort(custom_sort);
               renderInfo([res[res.length - 1]]);
               jsonTable(res[res.length - 1]);
-              var popup = L.popup()
-                .setLatLng(res[res.length - 1].geocoded_column_1.coordinates)
-                .setContent(res[res.length - 1].name)
-                .openOn(mymap);
+              L.marker(swap(res[res.length - 1].geocoded_column_1.coordinates))
+                .addTo(mymap)
+                .bindPopup(res[res.length - 1].name)
+                .openPopup();
             } else if (
               (category.value === "Restaurant Name" ||
                 category.value === "Address") &&
@@ -298,9 +305,10 @@
               res = res.sort(custom_sort);
               jsonTable(res[res.length - 1]);
               var popup = L.popup()
-                .setLatLng(res[res.length - 1].geocoded_column_1.coordinates)
-                .setContent(res[res.length - 1].name)
-                .openOn(mymap);
+              L.marker(swap(res[res.length - 1].geocoded_column_1.coordinates))
+                .addTo(mymap)
+                .bindPopup(res[res.length - 1].name)
+                .openPopup();
             } else {
               if (check1 === true) {
                 alert(
