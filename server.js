@@ -5,7 +5,6 @@
 const express = require('express');
 const fetch = require('node-fetch');
 const { MongoClient } = require('mongodb');
-const sqlite3 = require('sqlite3').verbose();
 require('dotenv/config');
 
 const app = express();
@@ -35,8 +34,8 @@ fetch(baseURL)
         const filtered = await data.filter((key) => (key.category === 'Restaurant' || key.category === 'Carry-out'
            || key.category === 'Fast Food'));
         const filter = await filtered.filter((key) => new Date(key.inspection_date).getFullYear() === 2018
-         || new Date(key.inspection_date).getFullYear() === 2019
-         || new Date(key.inspection_date).getFullYear() === 2020);
+            || new Date(key.inspection_date).getFullYear() === 2019
+            || new Date(key.inspection_date).getFullYear() === 2020);
         collection.insertMany(filter, (error, result) => {
           if (error) throw error;
           console.log(`Number of documents inserted: ${result.insertedCount}`);
@@ -57,7 +56,7 @@ app.route('/api').put((req, res) => {
         .catch((error) => {
           console.log(error);
         });
-    } else if (req.body.category === 'Address' && !req.body.searchBar.match(/^\d{1,5}$/)) {
+    } else if (req.body.category === 'Address' && !req.body.searchBar.match(/^\d{5}$/)) {
       await db.collection('restaurant').find({ address_line_1: req.body.searchBar }).toArray().then((data) => {
         res.send(data);
       })
@@ -72,7 +71,7 @@ app.route('/api').put((req, res) => {
           console.log(error);
         });
     } else {
-      console.log('wrong input');
+      res.send({ message: 'error' });
     }
   });
 });

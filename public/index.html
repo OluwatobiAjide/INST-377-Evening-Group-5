@@ -181,6 +181,21 @@
           new Date(b.inspection_date).getFullYear()
         );
       }
+      function checkComp(res){
+        var keys = Object.keys(res);
+        var check = true;
+        for (let key = 11; key < keys.length - 5; key++) {
+          const name = keys[key];
+          const result = res[name];
+          if(result === 'Out of Compliance'){
+            check = false;
+            break;
+          }
+        }
+        if(check)  document.getElementById("description").style.backgroundColor = '#3ec92e';
+        else       document.getElementById("description").style.backgroundColor = '#FF0000';
+        return check;
+      }
       function jsonTable(res) {
         var table = document.createElement("table");
         table.className = "gridtable";
@@ -271,8 +286,6 @@
         })
           .then((data) => data.json())
           .then((res) => {
-           
-           
             if (
               searchBar.value.match(/^\d{5}$/) &&
               category.value === "Zip Code" &&
@@ -295,7 +308,8 @@
                 .addTo(mymap)
                 .bindPopup(res[res.length - 1].name)
                 .openPopup();
-           
+                checkComp(res[res.length - 1]);
+               
             } else if (
               (category.value === "Restaurant Name" ||
                 category.value === "Address") &&
@@ -311,6 +325,7 @@
                 .addTo(mymap)
                 .bindPopup(res[res.length - 1].name)
                 .openPopup();
+                checkComp(res[res.length - 1]);
             } else if (
               (category.value === "Restaurant Name" ||
                 category.value === "Address") &&
@@ -326,6 +341,7 @@
                 .addTo(mymap)
                 .bindPopup(res[res.length - 1].name)
                 .openPopup();
+                checkComp(res[res.length - 1]);
             } else {
               if (check1 === true || check2 === true) {
                 alert(
@@ -342,7 +358,6 @@
       }
       const btn = document.querySelector("#searchB");
       btn.addEventListener("click", getInfo);
-      //const options = document.querySelector("#category");
     </script>
   </body>
 </html>
