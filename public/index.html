@@ -183,7 +183,7 @@
         thead.appendChild(headRow);
         table.appendChild(thead);
         var keys = Object.keys(res);
-        for (let key = 11; key < keys.length - 5;key++) {
+        for (let key = 11; key < keys.length - 5; key++) {
           var tr = document.createElement("tr");
           const name = keys[key];
           const result = res[name];
@@ -237,7 +237,7 @@
         const category = document.querySelector("#category");
         const check1 = document.querySelector("#check1");
         const check2 = document.querySelector("#check2");
-        
+
         fetch("/api", {
           method: "PUT",
           headers: {
@@ -270,21 +270,37 @@
             ) {
               res = res.sort(custom_sort);
               renderInfo([res[res.length - 1]]);
-            } else if( (category.value === "Restaurant Name" ||
+              var popup = L.popup()
+                .setLatLng(res[res.length - 1].geocoded_column_1.coordinates)
+                .setContent(res[res.length - 1].name)
+                .openOn(mymap);
+            } else if (
+              (category.value === "Restaurant Name" ||
                 category.value === "Address") &&
               !searchBar.value.match(/^\d{5}$/) &&
               check2.checked === true &&
-              check1.checked === true){
-                res = res.sort(custom_sort);
-                renderInfo([res[res.length - 1]]);
-                jsonTable(res[res.length-1]);
-            } else if(  (category.value === "Restaurant Name" ||
+              check1.checked === true
+            ) {
+              res = res.sort(custom_sort);
+              renderInfo([res[res.length - 1]]);
+              jsonTable(res[res.length - 1]);
+              var popup = L.popup()
+                .setLatLng(res[res.length - 1].geocoded_column_1.coordinates)
+                .setContent(res[res.length - 1].name)
+                .openOn(mymap);
+            } else if (
+              (category.value === "Restaurant Name" ||
                 category.value === "Address") &&
               !searchBar.value.match(/^\d{5}$/) &&
               check2.checked === false &&
-              check1.checked === true){
-                res = res.sort(custom_sort);
-                jsonTable(res[res.length-1]);
+              check1.checked === true
+            ) {
+              res = res.sort(custom_sort);
+              jsonTable(res[res.length - 1]);
+              var popup = L.popup()
+                .setLatLng(res[res.length - 1].geocoded_column_1.coordinates)
+                .setContent(res[res.length - 1].name)
+                .openOn(mymap);
             } else {
               if (check1 === true) {
                 alert(
