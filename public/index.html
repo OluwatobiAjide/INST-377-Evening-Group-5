@@ -163,7 +163,39 @@
             "pk.eyJ1IjoidGFqaWRlIiwiYSI6ImNrOTdtaGl3MjA4MzEzZXByMjRzNWh3ZGEifQ.vVqCrdfxdkQ_XFENH2v7CA",
         }
       ).addTo(mymap);
+      function renderInfo(res) {
+        var table = document.createElement("table");
+        table.className = "gridtable";
+        var thead = document.createElement("thead");
+        var tbody = document.createElement("tbody");
+        var headRow = document.createElement("tr");
+        ["Name", "Result", "Inspection Year"].forEach((el) => {
+          var th = document.createElement("th");
+          th.appendChild(document.createTextNode(el));
+          headRow.appendChild(th);
+        });
+        thead.appendChild(headRow);
+        table.appendChild(thead);
+        for (key in res) {
+          var tr = document.createElement("tr");
+          const name = res[key].name;
+          const result = res[key].inspection_results;
+          const year = new Date(res[key].inspection_date).getFullYear();
+          var td1 = document.createElement("td");
+          var td2 = document.createElement("td");
+          var td3 = document.createElement("td");
+          td1.appendChild(document.createTextNode(name));
+          td2.appendChild(document.createTextNode(result));
+          td3.appendChild(document.createTextNode(year));
+          tr.appendChild(td1);
+          tr.appendChild(td2);
+          tr.appendChild(td3);
+          tbody.appendChild(tr);
 
+          table.appendChild(tbody);
+        }
+        document.getElementById("description").appendChild(table);
+      }
       function getInfo() {
         const searchBar = document.querySelector("#search");
         const category = document.querySelector("#category");
@@ -185,33 +217,37 @@
         })
           .then((data) => data.json())
           .then((res) => {
-            var table = document.createElement("table");
-            table.className = "gridtable";
-            var thead = document.createElement("thead");
-            var tbody = document.createElement("tbody");
-            var headRow = document.createElement("tr");
-            ["Name", "Result"].forEach((el) => {
-              var th = document.createElement("th");
-              th.appendChild(document.createTextNode(el));
-              headRow.appendChild(th);
-            });
-            thead.appendChild(headRow);
-            table.appendChild(thead);
-            for (key in res) {
-              var tr = document.createElement("tr");
-              const name = res[key].name;
-              const result = res[key].inspection_results;
-              var td1 = document.createElement("td");
-              var td2 = document.createElement("td");
-              td1.appendChild(document.createTextNode(name));
-              td2.appendChild(document.createTextNode(result));
-              tr.appendChild(td1);
-              tr.appendChild(td2);
-              tbody.appendChild(tr);
 
-              table.appendChild(tbody);
+           
+            if (
+              searchBar.value.match(/^\d{5}$/) &&
+              category.value === "Zip Code" &&
+              check2.checked === true &&
+              check1.checked === false
+            ) {
+              renderInfo(res);
+            } else if (
+              category.value === "Address" &&
+              !searchBar.value.match(/^\d{5}$/) &&
+              check2.checked === true &&
+              check1.checked === false
+            ) {
+              renderInfo(res);
+            } else if (
+              category.value === "Restaurant Name" &&
+              !searchBar.value.match(/^\d{5}$/) &&
+              check2.checked === true &&
+              check1.checked === false
+            ) {
+              renderInfo(res);
+            } else {
+              if (check1 === true){
+                alert(searchBar.value + " can't be searched with  " + category.value + "and full result" );
+              } else {
+                alert("Wrong Value Inputed");
+              }
+              
             }
-            document.getElementById("description").appendChild(table);
           });
       }
       const btn = document.querySelector("#searchB");

@@ -32,9 +32,12 @@ fetch(baseURL)
         }
         const db = await client.db('data');
         const collection = await db.collection('restaurant');
-        const filtered = data.filter((key) => (key.category === 'Restaurant' || key.category === 'Carry-out'
+        const filtered = await data.filter((key) => (key.category === 'Restaurant' || key.category === 'Carry-out'
            || key.category === 'Fast Food'));
-        collection.insertMany(filtered, (error, result) => {
+        const filter = await filtered.filter((key) => new Date(key.inspection_date).getFullYear() === 2018
+         || new Date(key.inspection_date).getFullYear() === 2019
+         || new Date(key.inspection_date).getFullYear() === 2020);
+        collection.insertMany(filter, (error, result) => {
           if (error) throw error;
           console.log(`Number of documents inserted: ${result.insertedCount}`);
           console.log(result.insertedCount);
@@ -53,12 +56,21 @@ app.route('/api').put((req, res) => {
       })
         .catch((error) => {
           console.log(error);
-        })
-        .finally(() => {
-          client.close();
         });
-    } else {
-      console.log('error');
+    } else if (req.body.category === 'Address' && !req.body.searchBar.match(/^\d{1,5}$/)) {
+      await db.collection('restaurant').find({ address_line_1: req.body.searchBar }).toArray().then((data) => {
+        res.send(data);
+      })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (req.body.category === 'Restaurant Name' && !req.body.searchBar.match(/^\d{1,5}$/)) {
+      await db.collection('restaurant').find({ name: req.body.searchBar }).toArray().then((data) => {
+        res.send(data);
+      })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   });
 });
