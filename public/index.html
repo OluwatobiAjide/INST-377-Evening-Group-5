@@ -163,6 +163,42 @@
             "pk.eyJ1IjoidGFqaWRlIiwiYSI6ImNrOTdtaGl3MjA4MzEzZXByMjRzNWh3ZGEifQ.vVqCrdfxdkQ_XFENH2v7CA",
         }
       ).addTo(mymap);
+      function custom_sort(a, b) {
+        return (
+          new Date(a.inspection_date).getFullYear() -
+          new Date(b.inspection_date).getFullYear()
+        );
+      }
+      function jsonTable(res) {
+        var table = document.createElement("table");
+        table.className = "gridtable";
+        var thead = document.createElement("thead");
+        var tbody = document.createElement("tbody");
+        var headRow = document.createElement("tr");
+        ["Result Type", "Result"].forEach((el) => {
+          var th = document.createElement("th");
+          th.appendChild(document.createTextNode(el));
+          headRow.appendChild(th);
+        });
+        thead.appendChild(headRow);
+        table.appendChild(thead);
+        var keys = Object.keys(res);
+        for (let key = 11; key < keys.length - 5;key++) {
+          var tr = document.createElement("tr");
+          const name = keys[key];
+          const result = res[name];
+          var td1 = document.createElement("td");
+          var td2 = document.createElement("td");
+          td1.appendChild(document.createTextNode(name));
+          td2.appendChild(document.createTextNode(result));
+          tr.appendChild(td1);
+          tr.appendChild(td2);
+          tbody.appendChild(tr);
+
+          table.appendChild(tbody);
+        }
+        document.getElementById("description").appendChild(table);
+      }
       function renderInfo(res) {
         var table = document.createElement("table");
         table.className = "gridtable";
@@ -201,8 +237,7 @@
         const category = document.querySelector("#category");
         const check1 = document.querySelector("#check1");
         const check2 = document.querySelector("#check2");
-        //const formToSend = new FormData(target);
-
+        
         fetch("/api", {
           method: "PUT",
           headers: {
@@ -217,36 +252,50 @@
         })
           .then((data) => data.json())
           .then((res) => {
-
-           
             if (
               searchBar.value.match(/^\d{5}$/) &&
               category.value === "Zip Code" &&
               check2.checked === true &&
               check1.checked === false
             ) {
-              renderInfo(res);
+              res = res.sort(custom_sort);
+
+              renderInfo(res[res.length - 1]);
             } else if (
-              category.value === "Address" &&
+              (category.value === "Restaurant Name" ||
+                category.value === "Address") &&
               !searchBar.value.match(/^\d{5}$/) &&
               check2.checked === true &&
               check1.checked === false
             ) {
-              renderInfo(res);
-            } else if (
-              category.value === "Restaurant Name" &&
+              res = res.sort(custom_sort);
+              renderInfo([res[res.length - 1]]);
+            } else if( (category.value === "Restaurant Name" ||
+                category.value === "Address") &&
               !searchBar.value.match(/^\d{5}$/) &&
               check2.checked === true &&
-              check1.checked === false
-            ) {
-              renderInfo(res);
+              check1.checked === true){
+                res = res.sort(custom_sort);
+                renderInfo([res[res.length - 1]]);
+                jsonTable(res[res.length-1]);
+            } else if(  (category.value === "Restaurant Name" ||
+                category.value === "Address") &&
+              !searchBar.value.match(/^\d{5}$/) &&
+              check2.checked === false &&
+              check1.checked === true){
+                res = res.sort(custom_sort);
+                jsonTable(res[res.length-1]);
             } else {
-              if (check1 === true){
-                alert(searchBar.value + " can't be searched with  " + category.value + "and full result" );
+              if (check1 === true) {
+                alert(
+                  searchBar.value +
+                    " can't be searched with  " +
+                    category.value +
+                    "and full result"
+                );
               } else {
                 alert("Wrong Value Inputed");
               }
-              
             }
           });
       }
