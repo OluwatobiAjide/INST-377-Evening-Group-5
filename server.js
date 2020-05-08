@@ -31,6 +31,7 @@ fetch(baseURL)
         }
         const db = await client.db('data');
         const collection = await db.collection('restaurant');
+        collection.remove();
         const filtered = await data.filter((key) => (key.category === 'Restaurant' || key.category === 'Carry-out'
            || key.category === 'Fast Food'));
         const filter = await filtered.filter((key) => new Date(key.inspection_date).getFullYear() === 2018
