@@ -142,7 +142,19 @@
         <!-- conttent separated to 2 flex boxes -->
         <div class="content">
           <div id="mapid"></div>
-          <div class="data" id="description"></div>
+          <div class="data" id="description">
+            <h6>Instructions</h6>
+            <ul>
+              <li>Click the toggle dropdown to pick a category(Zipcode,Address,Restaurant Name) to input into the search bar</li>
+              <li>In the same toggle you can pick between gettting the full result or safete level</li>
+            </ul> 
+            <h6>Caution!</h6>
+            <ul>
+              <li>Don't search zipcode with full result</li>
+              <li>Make sure to input correct values with associated category</li>
+            </ul> 
+
+          </div>
         </div>
         <div class="footer"></div>
       </div>
@@ -236,6 +248,7 @@
 
           table.appendChild(tbody);
         }
+        document
         document.getElementById("description").appendChild(table);
       }
       function getInfo() {
@@ -258,15 +271,16 @@
         })
           .then((data) => data.json())
           .then((res) => {
+           
+           
             if (
               searchBar.value.match(/^\d{5}$/) &&
               category.value === "Zip Code" &&
               check2.checked === true &&
               check1.checked === false
             ) {
-              res = res.sort(custom_sort);
-
-              renderInfo(res[res.length - 1]);
+              document.getElementById("description").innerHTML = '';
+              renderInfo(res);
             } else if (
               (category.value === "Restaurant Name" ||
                 category.value === "Address") &&
@@ -274,6 +288,7 @@
               check2.checked === true &&
               check1.checked === false
             ) {
+              document.getElementById("description").innerHTML = '';
               res = res.sort(custom_sort);
               renderInfo([res[res.length - 1]]);
               L.marker(swap(res[res.length - 1].geocoded_column_1.coordinates))
@@ -288,6 +303,7 @@
               check2.checked === true &&
               check1.checked === true
             ) {
+              document.getElementById("description").innerHTML = '';
               res = res.sort(custom_sort);
               renderInfo([res[res.length - 1]]);
               jsonTable(res[res.length - 1]);
@@ -302,6 +318,7 @@
               check2.checked === false &&
               check1.checked === true
             ) {
+              document.getElementById("description").innerHTML = '';
               res = res.sort(custom_sort);
               jsonTable(res[res.length - 1]);
               var popup = L.popup()
@@ -310,7 +327,7 @@
                 .bindPopup(res[res.length - 1].name)
                 .openPopup();
             } else {
-              if (check1 === true) {
+              if (check1 === true || check2 === true) {
                 alert(
                   searchBar.value +
                     " can't be searched with  " +

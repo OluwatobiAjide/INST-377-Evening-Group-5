@@ -50,7 +50,7 @@ app.route('/api').put((req, res) => {
   MongoClient.connect(uri, { useNewUrlParser: true }, async (err, client) => {
     if (err) throw err;
     const db = client.db('data');
-    if (req.body.category === 'Zip Code' && req.body.searchBar.match(/^\d{1,5}$/)) {
+    if (req.body.category === 'Zip Code' && req.body.searchBar.match(/^\d{5}$/)) {
       await db.collection('restaurant').find({ zip: req.body.searchBar }).toArray().then((data) => {
         res.send(data);
       })
@@ -64,13 +64,15 @@ app.route('/api').put((req, res) => {
         .catch((error) => {
           console.log(error);
         });
-    } else if (req.body.category === 'Restaurant Name' && !req.body.searchBar.match(/^\d{1,5}$/)) {
+    } else if (req.body.category === 'Restaurant Name' && !req.body.searchBar.match(/^\d{5}$/)) {
       await db.collection('restaurant').find({ name: req.body.searchBar }).toArray().then((data) => {
         res.send(data);
       })
         .catch((error) => {
           console.log(error);
         });
+    } else {
+      console.log('wrong input');
     }
   });
 });
