@@ -160,7 +160,8 @@
                 or safete level
               </li>
               <li>
-               Green Background means safe restaurant and red means the opposite
+                Green Background means safe restaurant and red means the
+                opposite
               </li>
             </ul>
             <h6>Caution!</h6>
@@ -170,7 +171,7 @@
                 Make sure to input correct values with associated category
               </li>
               <li>
-               Background des not change for all search options
+                Background des not change for all search options
               </li>
             </ul>
           </div>
@@ -181,6 +182,7 @@
     <!-- map -->
     <script>
       var mymap = L.map("mapid").setView([38.9897, -76.9378], 13);
+      var markers;
       L.tileLayer(
         "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
         {
@@ -194,6 +196,7 @@
             "pk.eyJ1IjoidGFqaWRlIiwiYSI6ImNrOTdtaGl3MjA4MzEzZXByMjRzNWh3ZGEifQ.vVqCrdfxdkQ_XFENH2v7CA",
         }
       ).addTo(mymap);
+   
       function custom_sort(a, b) {
         return (
           new Date(a.inspection_date).getFullYear() -
@@ -255,7 +258,10 @@
         arr[0] = tmp;
         return arr;
       }
-      function renderInfo(res,type) {
+      function renderInfo(res, type) {
+       
+        var groups = [];
+        var theMarker;
         var table = document.createElement("table");
         table.className = "gridtable";
         var thead = document.createElement("thead");
@@ -270,9 +276,12 @@
         table.appendChild(thead);
         for (key in res) {
           var tr = document.createElement("tr");
-          const name = (type === "Name" ? res[key].name : res[key].address_line_1);
-         
-          const result =  res[key].inspection_results;
+           theMarker = L.marker(swap(res[key].geocoded_column_1.coordinates)).bindPopup(res[key].name);
+          groups.push(theMarker);
+          const name =
+            type === "Name" ? res[key].name : res[key].address_line_1;
+
+          const result = res[key].inspection_results;
           const year = new Date(res[key].inspection_date).getFullYear();
           var td1 = document.createElement("td");
           var td2 = document.createElement("td");
@@ -287,14 +296,18 @@
 
           table.appendChild(tbody);
         }
-        document;
+       markers = L.layerGroup(groups).addTo(mymap);
+      
         document.getElementById("description").appendChild(table);
       }
       function getInfo() {
+        if (markers) markers.clearLayers();
         const searchBar = document.querySelector("#search");
         const category = document.querySelector("#category");
         const check1 = document.querySelector("#check1");
         const check2 = document.querySelector("#check2");
+        document.getElementById("description").style.backgroundColor =
+          "#FFCB9A";
 
         fetch("/api", {
           method: "PUT",
@@ -317,15 +330,16 @@
               check1.checked === false
             ) {
               document.getElementById("description").innerHTML = "";
-              renderInfo(res.sort(custom_sort),"Name");
+              renderInfo(res.sort(custom_sort), "Name");
             } else if (
               category.value === "Restaurant Name" &&
               check2.checked === true &&
               check1.checked === false &&
-              !searchBar.value.match(/^\d{5}$/ && !req.body.searchBar.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)? [a-zA-Z]+/))
+              !searchBar.value.match(/^\d{5}$/) &&
+              !searchBar.value.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)? [a-zA-Z]+/)
             ) {
               document.getElementById("description").innerHTML = "";
-              renderInfo(res.sort(custom_sort),"Address");
+              renderInfo(res.sort(custom_sort), "Address");
             } else if (
               category.value === "Address" &&
               searchBar.value.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)? [a-zA-Z]+/) &&
@@ -334,12 +348,7 @@
             ) {
               document.getElementById("description").innerHTML = "";
               res = res.sort(custom_sort);
-              renderInfo([res[res.length - 1]],"Name");
-              L.marker(swap(res[res.length - 1].geocoded_column_1.coordinates))
-                .addTo(mymap)
-                .bindPopup(res[res.length - 1].name)
-                .openPopup();
-              checkComp(res[res.length - 1]);
+              renderInfo([res[res.length - 1]], "Name");
             } else if (
               category.value === "Address" &&
               searchBar.value.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)? [a-zA-Z]+/) &&
@@ -348,15 +357,11 @@
             ) {
               document.getElementById("description").innerHTML = "";
               res = res.sort(custom_sort);
-              renderInfo([res[res.length - 1]],"Name");
+              renderInfo([res[res.length - 1]], "Name");
               jsonTable(res[res.length - 1]);
-              L.marker(swap(res[res.length - 1].geocoded_column_1.coordinates))
-                .addTo(mymap)
-                .bindPopup(res[res.length - 1].name)
-                .openPopup();
               checkComp(res[res.length - 1]);
             } else if (
-              (category.value === "Address") &&
+              category.value === "Address" &&
               searchBar.value.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)? [a-zA-Z]+/) &&
               check2.checked === false &&
               check1.checked === true
@@ -364,11 +369,9 @@
               document.getElementById("description").innerHTML = "";
               res = res.sort(custom_sort);
               jsonTable(res[res.length - 1]);
-              var popup = L.popup();
               L.marker(swap(res[res.length - 1].geocoded_column_1.coordinates))
                 .addTo(mymap)
-                .bindPopup(res[res.length - 1].name)
-                .openPopup();
+                .bindPopup(res[res.length - 1].name);
               checkComp(res[res.length - 1]);
             } else {
               if (check1 === true || check2 === true) {
