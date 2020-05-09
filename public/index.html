@@ -6,6 +6,11 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <link
       rel="stylesheet"
+      type="text/css"
+      href="//fonts.googleapis.com/css?family=Playfair+Display"
+    />
+    <link
+      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <link
@@ -69,6 +74,7 @@
                     class="form-control form-control-search"
                     id="search"
                     placeholder="Search"
+                    type="submit"
                   />
                   <div class="input-group-btn">
                     <div class="btn-group" role="group">
@@ -84,7 +90,7 @@
                           class="dropdown-menu dropdown-menu-right"
                           role="menu"
                         >
-                          <form>
+                          <form id="options">
                             <div class="form-group">
                               <label for="category" class="text-dark"
                                 >Category</label
@@ -102,6 +108,7 @@
                                 <input
                                   type="checkbox"
                                   class="custom-control-input"
+                                  id="check1"
                                 />
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description"
@@ -112,6 +119,7 @@
                                 <input
                                   type="checkbox"
                                   class="custom-control-input"
+                                  id="check2"
                                 />
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description"
@@ -139,12 +147,42 @@
         <!-- conttent separated to 2 flex boxes -->
         <div class="content">
           <div id="mapid"></div>
+<<<<<<< HEAD
           <div class="data" id="Description">
             <table style="width:100%" id = "tb">
               <tr>
                 <th>Name</th>
                 <th>Testing</th>
               </tr>
+=======
+          <div class="data" id="description">
+            <h6>Instructions</h6>
+            <ul>
+              <li>
+                Click the toggle dropdown to pick a
+                category(Zipcode,Address,Restaurant Name) to input into the
+                search bar(Case-insensitive)
+              </li>
+              <li>
+                In the same toggle you can pick between gettting the full result
+                or safete level
+              </li>
+              <li>
+                Green Background means safe restaurant and red means the
+                opposite
+              </li>
+            </ul>
+            <h6>Caution!</h6>
+            <ul>
+              <li>Don't search zipcode with full result</li>
+              <li>
+                Make sure to input correct values with associated category
+              </li>
+              <li>
+                Background does not change for all search options
+              </li>
+            </ul>
+>>>>>>> 6241e5cbf293dad7d82ba87a45b7ab7b8709a0e8
           </div>
         </div>
         <div class="footer"></div>
@@ -153,6 +191,7 @@
     <!-- map -->
     <script>
       var mymap = L.map("mapid").setView([38.9897, -76.9378], 13);
+      var markers;
       L.tileLayer(
         "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
         {
@@ -166,19 +205,134 @@
             "pk.eyJ1IjoidGFqaWRlIiwiYSI6ImNrOTdtaGl3MjA4MzEzZXByMjRzNWh3ZGEifQ.vVqCrdfxdkQ_XFENH2v7CA",
         }
       ).addTo(mymap);
+   
+      function custom_sort(a, b) {
+        return (
+          new Date(a.inspection_date).getFullYear() -
+          new Date(b.inspection_date).getFullYear()
+        );
+      }
+      function checkComp(res) {
+        var keys = Object.keys(res);
+        var check = true;
+        for (let key = 11; key < keys.length - 5; key++) {
+          const name = keys[key];
+          const result = res[name];
+          if (result === "Out of Compliance") {
+            check = false;
+            break;
+          }
+        }
+        if (check)
+          document.getElementById("description").style.backgroundColor =
+            "#3ec92e";
+        else
+          document.getElementById("description").style.backgroundColor =
+            "#FF0000";
+        return check;
+      }
+      function jsonTable(res) {
+        var table = document.createElement("table");
+        table.className = "gridtable";
+        var thead = document.createElement("thead");
+        var tbody = document.createElement("tbody");
+        var headRow = document.createElement("tr");
+        ["Result Type", "Result"].forEach((el) => {
+          var th = document.createElement("th");
+          th.appendChild(document.createTextNode(el));
+          headRow.appendChild(th);
+        });
+        thead.appendChild(headRow);
+        table.appendChild(thead);
+        var keys = Object.keys(res);
+        for (let key = 11; key < keys.length - 5; key++) {
+          var tr = document.createElement("tr");
+          const name = keys[key];
+          const result = res[name];
+          var td1 = document.createElement("td");
+          var td2 = document.createElement("td");
+          td1.appendChild(document.createTextNode(name));
+          td2.appendChild(document.createTextNode(result));
+          tr.appendChild(td1);
+          tr.appendChild(td2);
+          tbody.appendChild(tr);
 
+          table.appendChild(tbody);
+        }
+        document.getElementById("description").appendChild(table);
+      }
+      function swap(arr) {
+        var tmp = arr[1];
+        arr[1] = arr[0];
+        arr[0] = tmp;
+        return arr;
+      }
+      function renderInfo(res, type) {
+       
+        var groups = [];
+        var theMarker;
+        var table = document.createElement("table");
+        table.className = "gridtable";
+        var thead = document.createElement("thead");
+        var tbody = document.createElement("tbody");
+        var headRow = document.createElement("tr");
+        [type, "Result", "Inspection Year"].forEach((el) => {
+          var th = document.createElement("th");
+          th.appendChild(document.createTextNode(el));
+          headRow.appendChild(th);
+        });
+        thead.appendChild(headRow);
+        table.appendChild(thead);
+        for (key in res) {
+          var tr = document.createElement("tr");
+           theMarker = L.marker(swap(res[key].geocoded_column_1.coordinates)).bindPopup(res[key].name);
+          groups.push(theMarker);
+          const name =
+            type === "Name" ? res[key].name : res[key].address_line_1;
+
+          const result = res[key].inspection_results;
+          const year = new Date(res[key].inspection_date).getFullYear();
+          var td1 = document.createElement("td");
+          var td2 = document.createElement("td");
+          var td3 = document.createElement("td");
+          td1.appendChild(document.createTextNode(name));
+          td2.appendChild(document.createTextNode(result));
+          td3.appendChild(document.createTextNode(year));
+          tr.appendChild(td1);
+          tr.appendChild(td2);
+          tr.appendChild(td3);
+          tbody.appendChild(tr);
+
+          table.appendChild(tbody);
+        }
+       markers = L.layerGroup(groups).addTo(mymap);
+      
+        document.getElementById("description").appendChild(table);
+      }
       function getInfo() {
+        if (markers) markers.clearLayers();
         const searchBar = document.querySelector("#search");
-        //const description = document.querySelector("#Description");
+        const category = document.querySelector("#category");
+        const check1 = document.querySelector("#check1");
+        const check2 = document.querySelector("#check2");
+        document.getElementById("description").style.backgroundColor =
+          "#FFCB9A";
 
         fetch("/api", {
-          method: "GET",
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
+          body: JSON.stringify({
+            searchBar: searchBar.value.toUpperCase(),
+            category: category.value,
+            check1: check1.checked,
+            check2: check2.checked,
+          }),
         })
           .then((data) => data.json())
           .then((res) => {
+<<<<<<< HEAD
             var dataul = document.getElementById("tb");
             for (key in res) {
               if (res[key].zip === searchBar.value) {
@@ -197,13 +351,74 @@
                 trtable.appendChild(dataname); 
                 trtable.appendChild(dataresult);
                 dataul.appendChild(trtable);
+=======
+            if (
+              searchBar.value.match(/^\d{5}$/) &&
+              category.value === "Zip Code" &&
+              check2.checked === true &&
+              check1.checked === false
+            ) {
+              document.getElementById("description").innerHTML = "";
+              renderInfo(res.sort(custom_sort), "Name");
+            } else if (
+              category.value === "Restaurant Name" &&
+              check2.checked === true &&
+              check1.checked === false &&
+              !searchBar.value.match(/^\d{5}$/) &&
+              !searchBar.value.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)? [a-zA-Z]+/)
+            ) {
+              document.getElementById("description").innerHTML = "";
+              renderInfo(res.sort(custom_sort), "Address");
+            } else if (
+              category.value === "Address" &&
+              searchBar.value.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)? [a-zA-Z]+/) &&
+              check2.checked === true &&
+              check1.checked === false
+            ) {
+              document.getElementById("description").innerHTML = "";
+              res = res.sort(custom_sort);
+              renderInfo([res[res.length - 1]], "Name");
+            } else if (
+              category.value === "Address" &&
+              searchBar.value.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)? [a-zA-Z]+/) &&
+              check2.checked === true &&
+              check1.checked === true
+            ) {
+              document.getElementById("description").innerHTML = "";
+              res = res.sort(custom_sort);
+              renderInfo([res[res.length - 1]], "Name");
+              jsonTable(res[res.length - 1]);
+              checkComp(res[res.length - 1]);
+            } else if (
+              category.value === "Address" &&
+              searchBar.value.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)? [a-zA-Z]+/) &&
+              check2.checked === false &&
+              check1.checked === true
+            ) {
+              document.getElementById("description").innerHTML = "";
+              res = res.sort(custom_sort);
+              jsonTable(res[res.length - 1]);
+              L.marker(swap(res[res.length - 1].geocoded_column_1.coordinates))
+                .addTo(mymap)
+                .bindPopup(res[res.length - 1].name);
+              checkComp(res[res.length - 1]);
+            } else {
+              if (check1 === true || check2 === true) {
+                alert(
+                  searchBar.value +
+                    " can't be searched with  " +
+                    category.value +
+                    "and full result"
+                );
+              } else {
+                alert("Wrong Value Inputed");
+>>>>>>> 6241e5cbf293dad7d82ba87a45b7ab7b8709a0e8
               }
             }
           });
       }
       const btn = document.querySelector("#searchB");
       btn.addEventListener("click", getInfo);
-      //const options = document.querySelector("#category");
     </script>
   </body>
 </html>
