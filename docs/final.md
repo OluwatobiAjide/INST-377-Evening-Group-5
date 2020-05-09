@@ -1,4 +1,4 @@
-* Title--Safety Diet  
+* Title-Restaurant Rater 
 * Team members -- Ruiqi Lai, Oluwatobi Ajide, Sihui Feng
 * Link to where your app is running --
 * Information problem you're trying to solve --
