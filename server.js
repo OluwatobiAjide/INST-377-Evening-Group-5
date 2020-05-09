@@ -50,21 +50,21 @@ app.route('/api').put((req, res) => {
   MongoClient.connect(uri, { useNewUrlParser: true }, async (err, client) => {
     if (err) throw err;
     const db = client.db('data');
-    if (req.body.category === 'Zip Code' && req.body.searchBar.match(/^\d{5}$/)) {
+    if (req.body.category === 'Zip Code' && req.body.searchBar.match(/^\d{5}$/) && !req.body.searchBar.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)? [a-zA-Z]+/)) {
       await db.collection('restaurant').find({ zip: req.body.searchBar }).toArray().then((data) => {
         res.send(data);
       })
         .catch((error) => {
           console.log(error);
         });
-    } else if (req.body.category === 'Address' && !req.body.searchBar.match(/^\d{5}$/)) {
+    } else if (req.body.category === 'Address' && req.body.searchBar.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)? [a-zA-Z]+/)) {
       await db.collection('restaurant').find({ address_line_1: req.body.searchBar }).toArray().then((data) => {
         res.send(data);
       })
         .catch((error) => {
           console.log(error);
         });
-    } else if (req.body.category === 'Restaurant Name' && !req.body.searchBar.match(/^\d{5}$/)) {
+    } else if (req.body.category === 'Restaurant Name' && !req.body.searchBar.match(/^\d{5}$/) && !req.body.searchBar.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)? [a-zA-Z]+/)) {
       await db.collection('restaurant').find({ name: req.body.searchBar }).toArray().then((data) => {
         res.send(data);
       })
