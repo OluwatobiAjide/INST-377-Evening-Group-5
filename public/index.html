@@ -145,8 +145,6 @@
                 <th>Name</th>
                 <th>Testing</th>
               </tr>
-              <tr id = "TR">
-              </tr>
           </div>
         </div>
         <div class="footer"></div>
@@ -181,19 +179,24 @@
         })
           .then((data) => data.json())
           .then((res) => {
-            var dataul = document.getElementById("TR");
+            var dataul = document.getElementById("tb");
             for (key in res) {
               if (res[key].zip === searchBar.value) {
                 const name = res[key].name;
                 const result = res[key].inspection_results;
 
+                var trtable = document.createElement("tr");
                 var dataname = document.createElement("td");
-                var dataresult = document.createElement("td")
+                var dataresult = document.createElement("td");
+
                 var datalist1 = document.createTextNode(name);
                 var datalist2 = document.createTextNode(result);
+
                 dataname.appendChild(datalist1);
                 dataresult.appendChild(datalist2);
-                dataul.appendChild(dataname+dataresult); 
+                trtable.appendChild(dataname); 
+                trtable.appendChild(dataresult);
+                dataul.appendChild(trtable);
               }
             }
           });
