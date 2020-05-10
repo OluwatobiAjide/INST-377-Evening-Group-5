@@ -5,6 +5,11 @@
 html {
   --scrollbarBG: #CFD8DC;
   --thumbBG: #2C3531;
+
+}
+body{
+  background-image: url('./back.jpg');
+  background-size: 100% 100%;
 }
 .about::-webkit-scrollbar {
   width: 11px;
@@ -225,7 +230,9 @@ table.gridtable td {
     flex-flow: column nowrap;
   }
 
-  
+  .team{
+    flex-shrink: 8;
+  }
   .content {
    flex-direction: column-reverse;
   }
