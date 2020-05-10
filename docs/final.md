@@ -1,7 +1,9 @@
-* Title-Restaurant Rater 
+* Title - Restaurant Rater 
 * Team members -- Ruiqi Lai, Oluwatobi Ajide, Sihui Feng
-* Link to where your app is running --
+* Link to where your app is running -- 
+https://rater-restaurant.herokuapp.com/
 * Information problem you're trying to solve --
+People who are concerned about food safety are unable to find the restaurant by scrolling down the dataset. It is important for people to have the satisfaction that they are eating in a sanitary environment and intaking food that is not contaminated.
 * Identified stakeholders/target browsers --Stakeholders: The restaurant/store owner and the customers. Our webpage is spreading the healthy test result from the police department which will impact the amount of customer to the store.
 
 * Data you chose to work with -- Prince George’s Country Open Data API Link:"https://data.princegeorgescountymd.gov/Health/Food-Inspection/umjn-t2iz"
@@ -14,6 +16,6 @@ In this project, our preliminary decision is to use HTML and CSS for the website
 
 
 
-* How/if your final system helps to address the problem
+* How/if your final system helps to address the problem 
 * Challenges faced and impact on final design
 * Possible future work directions with this problem -- 
