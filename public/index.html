@@ -197,12 +197,14 @@
         }
       ).addTo(mymap);
    
+   /*Custom sort for year*/
       function custom_sort(a, b) {
         return (
           new Date(a.inspection_date).getFullYear() -
           new Date(b.inspection_date).getFullYear()
         );
       }
+      /*Goes through the data of test to change background of document to red or green based compliance*/
       function checkComp(res) {
         var keys = Object.keys(res);
         var check = true;
@@ -222,6 +224,8 @@
             "#FF0000";
         return check;
       }
+
+      /*Makes a table version of json data( 2 columns) and ammends to to document.*/
       function jsonTable(res) {
         var table = document.createElement("table");
         table.className = "gridtable";
@@ -252,14 +256,15 @@
         }
         document.getElementById("description").appendChild(table);
       }
+      /*Swap 2 value array element*/
       function swap(arr) {
         var tmp = arr[1];
         arr[1] = arr[0];
         arr[0] = tmp;
         return arr;
       }
+      /*Makes a table version of json data(3 columns) and ammends to to document. It also adds markers to map*/
       function renderInfo(res, type) {
-       
         var groups = [];
         var theMarker;
         var table = document.createElement("table");
@@ -300,6 +305,7 @@
       
         document.getElementById("description").appendChild(table);
       }
+      /*The main function that use all the functions above render results based on search bar*/
       function getInfo() {
         if (markers) markers.clearLayers();
         const searchBar = document.querySelector("#search");

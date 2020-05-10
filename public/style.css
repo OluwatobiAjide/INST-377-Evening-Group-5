@@ -1,6 +1,41 @@
 * {
   box-sizing: border-box;
 }
+
+html {
+  --scrollbarBG: #CFD8DC;
+  --thumbBG: #2C3531;
+}
+.about::-webkit-scrollbar {
+  width: 11px;
+}
+.about {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+.about::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+.about::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG) ;
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
+}
+.data::-webkit-scrollbar {
+  width: 11px;
+}
+.data {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+.data::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+.data::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG) ;
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
+}
 .header {
   display: flex;
   flex-flow: row wrap;
@@ -50,14 +85,40 @@
   width: 100px;
   height: 100px;
 }
+.about{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 
+}
+
+#first,#second,#third{
+  width: 300px;
+  height: 350px;
+  border: 1px solid;
+  border-radius: 3px;
+  border-style: ridge;
+
+}
+.content2{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 450px;
+  border: 1px solid;
+  padding: 5px;
+  background-color:#2C3531;
+}
 .content {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 700px;
+  height: 450px;
   border: 1px solid;
   padding: 10px;
   background-color:#2C3531;
@@ -70,19 +131,26 @@
 
 .about,.docs{
   background-color: #FFCB9A;
-  width: 940px;
-  height: 650px;
+  width: 100%;
+  height: 400px;
   border: 1px solid;
   padding: 1%;
   margin-top: 10px;
-  margin-bottom: 10px;
+ 
   border-radius: 4px;
   border-style: groove;
+
 }
 
 .team{
   text-align: center;
+  background-color: #FFCB9A;
+  width: 100%;
+  height: 450px;
+  border: 1px solid;
+  border-style: groove;
 }
+.team p { margin:0 }
 .data,
 #mapid {
   width: 400px;
@@ -158,29 +226,12 @@ table.gridtable td {
   }
 
   
-
   .content {
    flex-direction: column-reverse;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 1000px;
-    border: 1px solid;
-    padding: 10px;
-    background-color:#2C3531;
+  }
+  .about{
+    flex-direction: column;
+    overflow: scroll;
   }
 
-  .about,.docs{
-    background-color: #FFCB9A;
-    width: 400px;
-    height: 950px;
-    border: 1px solid;
-    padding: 1%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    border-style: groove;
-  }
 }
