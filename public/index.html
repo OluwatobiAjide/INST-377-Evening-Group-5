@@ -147,14 +147,6 @@
         <!-- conttent separated to 2 flex boxes -->
         <div class="content">
           <div id="mapid"></div>
-<<<<<<< HEAD
-          <div class="data" id="Description">
-            <table style="width:100%" id = "tb">
-              <tr>
-                <th>Name</th>
-                <th>Testing</th>
-              </tr>
-=======
           <div class="data" id="description">
             <h6>Instructions</h6>
             <ul>
@@ -182,7 +174,6 @@
                 Background does not change for all search options
               </li>
             </ul>
->>>>>>> 6241e5cbf293dad7d82ba87a45b7ab7b8709a0e8
           </div>
         </div>
         <div class="footer"></div>
@@ -332,26 +323,6 @@
         })
           .then((data) => data.json())
           .then((res) => {
-<<<<<<< HEAD
-            var dataul = document.getElementById("tb");
-            for (key in res) {
-              if (res[key].zip === searchBar.value) {
-                const name = res[key].name;
-                const result = res[key].inspection_results;
-
-                var trtable = document.createElement("tr");
-                var dataname = document.createElement("td");
-                var dataresult = document.createElement("td");
-
-                var datalist1 = document.createTextNode(name);
-                var datalist2 = document.createTextNode(result);
-
-                dataname.appendChild(datalist1);
-                dataresult.appendChild(datalist2);
-                trtable.appendChild(dataname); 
-                trtable.appendChild(dataresult);
-                dataul.appendChild(trtable);
-=======
             if (
               searchBar.value.match(/^\d{5}$/) &&
               category.value === "Zip Code" &&
@@ -412,7 +383,6 @@
                 );
               } else {
                 alert("Wrong Value Inputed");
->>>>>>> 6241e5cbf293dad7d82ba87a45b7ab7b8709a0e8
               }
             }
           });
