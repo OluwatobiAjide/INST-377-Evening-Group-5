@@ -97,6 +97,14 @@ body{
   justify-content: space-between;
 
 }
+.docs{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+ 
+}
 
 #first,#second,#third{
   width: 300px;
@@ -106,6 +114,7 @@ body{
   border-style: ridge;
 
 }
+
 .content2{
   display: flex;
   flex-direction: column;
@@ -198,8 +207,21 @@ label {
   background-color:#2C3531;
 }
 
+.images{
+  width: 200px;
+  height: 150px;
+}
+.con{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 
+}
+.doc a{
+  text-decoration: none;
 
+}
 table.gridtable {
   font-family: "Playfair Display";
 	font-size:11px;
@@ -240,6 +262,24 @@ table.gridtable td {
   .about{
     flex-direction: column;
     overflow: scroll;
+  }
+  .docs{
+    overflow: scroll;
+  }
+  .docs::-webkit-scrollbar {
+    width: 11px;
+  }
+  .docs {
+    scrollbar-width: thin;
+    scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+  }
+  .docs::-webkit-scrollbar-track {
+    background: var(--scrollbarBG);
+  }
+  .docs::-webkit-scrollbar-thumb {
+    background-color: var(--thumbBG) ;
+    border-radius: 6px;
+    border: 3px solid var(--scrollbarBG);
   }
 
 }
