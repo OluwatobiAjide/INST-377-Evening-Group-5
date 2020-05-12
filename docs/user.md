@@ -20,6 +20,6 @@ Our website's goal is to help people to find out the most safety restaurant in P
 
 #### Suggestive option:
 
-        `zip code -> Name -> Address`
+`zip code -> Name -> Address`
 
 We suggest that users may search with zip code first, then search name and address. Because when users search with zip code, all the restaurants in that location will come out. Users can choose a restaurant on the list.
