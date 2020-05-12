@@ -21,7 +21,7 @@ Final.md
 -- Stakeholders: The restaurant/store owner and the customers. Our webpage is spreading the healthy test result from the police department which will impact the amount of customer to the store.
 
 
-## Data you chose to work with -- 
+## Data you chose to work with  
 -- Prince George’s Country Open Data API 
 Link:"https://data.princegeorgescountymd.gov/Health/Food-Inspection/umjn-t2iz"
 
@@ -37,13 +37,13 @@ Link:"https://data.princegeorgescountymd.gov/Health/Food-Inspection/umjn-t2iz"
 `In our system, we help user to figure our which resturants are safe, and which resturants are dangerous. When user want to choose a resturant to have meal, they can zip code, resturant address, and resturants' name to search the result. And the result will show them those resturants' different safty level.`
 
 
-## Challenges faced and impact on final design --
+## Challenges faced and impact on final design 
 1. Our searching section separate into three category(zip code, city, and restaurant name), now we only have the zip code search completed.
 2. sqlite failures
 3. Sometime we messed up the github local file while two group members are pushing to origin together.
 
 
-## Possible future work directions with this problem --
+## Possible future work directions with this problem 
 1. Implement the ability for users to submit reviews for restaurants/carry-out/fast food places
 2. Using Get and Post request to add reviews and get reviews on the client and server side.
 3. Add autocomplete to search bar
