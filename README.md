@@ -1,5 +1,3 @@
-Readme
------
 
 ## Title: Restaurant Rater
  Description of our project:
