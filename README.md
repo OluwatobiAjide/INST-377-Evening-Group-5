@@ -6,4 +6,4 @@
 * Link to pplication: https://rater-restaurant.herokuapp.com/
 * Description of target browsers:   IOS,Android, and laptop browsers
 * Link to User Manual: https://github.com/OluwatobiAjide/INST-377-Evening-Group-5/blob/master/docs/user.md
-* Link to Developer Manual: https://rater-restaurant.herokuapp.com/doc.html
+* Link to Developer Manual: https://github.com/OluwatobiAjide/INST-377-Evening-Group-5/blob/master/docs/DeveloperManual.md
