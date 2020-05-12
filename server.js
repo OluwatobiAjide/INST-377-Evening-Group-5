@@ -76,7 +76,15 @@ app.route('/api').put((req, res) => {
     }
   });
 }).get((req, res) => {
-  res.send({ message: 'No Get Request' });
+  res.status(200).send({
+    success: 'true',
+    message: 'Get request successful',
+
+  });
 }).post((req, res) => {
-  res.send({ message: 'No Post Request' });
+  res.status(200).send({
+    success: 'true',
+    message: 'Post request successful',
+
+  });
 });
