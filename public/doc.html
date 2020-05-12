@@ -29,39 +29,54 @@
         <div class="content">
           <div class="docs">
             <div class="doc">
-              <h1>Documentation</h1>
-              <p>
-                Welcome to <a href="https://rater-restaurant.herokuapp.com/"><b>Restaurant Rater</b></a>, come and find a safe place
-                to eat, the step of ueing our application listed on the home
-                page. Remember to select the correct category, you will get the
-                result by searching zip code, restaurant name, and city. Please
-                remember to enter the Prince George County zip code and city,
-                other wise you won't get any result
-              </p>
+              <h3>API End Points</h3>
+              <ul>
+                <li>
+                 <b> Get</b>: The GET request, this is to get data from the Prince
+                  Georges County dataset
+                </li>
+                <li>
+                 <b>Post</b>: this is going to requests the web server accepts the
+                  data enclose.
+                </li>
+                <li>
+                 <b>Put</b>: we used the put request to retrive search information
+                  from the user to render requested info.
+                </li>
+              </ul>
             </div>
             <div class="con">
-              <div><img class="images" src="example.jpg" alt="example" /></div>
-
               <div>
-                <p>
-                  This is the result you will get, a list of result and a
-                  location on the map. Your result contains testing result,
-                  restaurant name, and the inspection year the list are sorted
-                  by the inspection year, from the earliest to the latest when
-                  the user click the map, the name will pops up on the markers.
-                  You can also zoom in the map to see the location.
-                </p>
+                <h3>Functions</h3>
+                <ul>
+                  <li>
+                    <b>renderInfo(res, type)</b>: Makes a table version of json
+                    data(3 columns) and ammends to to document.
+                  </li>
+                  <li>
+                    <b>getInfo()</b>: The main function that use all the
+                    functions above render results based on search bar
+                  </li>
+                  <li>
+                    <b>jsonTable(res)</b>: Makes a table version of json data( 2
+                    columns) and ammends to to document.
+                  </li>
+                  <li>
+                    <b>checkComp(res)</b>: Goes through the data of test to
+                    change background of document to red or green based
+                    compliance
+                  </li>
+                  <li><b>custom_sort(a, b)</b>: Custom sort for year</li>
+                </ul>
               </div>
             </div>
             <p>
-              Make sure you check the instruction on the <a href="https://rater-restaurant.herokuapp.com/about.html"><b>About</b></a> page to get
-              more information
-            </p>
-            <p>
+              Check out the
               <a
-                href="https://github.com/OluwatobiAjide/INST-377-Evening-Group-5"
-                >Github Page</a
+                href="https://github.com/OluwatobiAjide/INST-377-Evening-Group-5/blob/master/docs/DeveloperManual.md"
+                ><b>Developer Manual</b></a
               >
+              page to get more information
             </p>
           </div>
         </div>

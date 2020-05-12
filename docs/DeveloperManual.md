@@ -51,7 +51,7 @@ Developer manual:
 3. API end points
     * `app.get` : The GET request, this is to get data from the Prince Georges County dataset
     * `app.post`: this is going to requests the web server accepts the data enclose.
-    * `app.put`: we used the put request for update resource on the server, and this is the only request needed in the body inputs.
+    * `app.put`: we used the put request to retrive search information from the user to render requested info.
 
  ## The functions
  1. `renderInfo(res, type)`
