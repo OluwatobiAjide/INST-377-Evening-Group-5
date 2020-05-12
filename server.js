@@ -75,4 +75,8 @@ app.route('/api').put((req, res) => {
       res.send({ message: 'error' });
     }
   });
+}).get((req, res) => {
+  res.send({ message: 'No Get Request' });
+}).post((req, res) => {
+  res.send({ message: 'No Post Request' });
 });
