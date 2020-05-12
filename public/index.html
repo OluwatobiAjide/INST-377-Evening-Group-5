@@ -341,22 +341,23 @@
               check2.checked === true &&
               check1.checked === false &&
               !searchBar.value.match(/^\d{5}$/) &&
-              !searchBar.value.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)? [a-zA-Z]*/)
+              !searchBar.value.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)?[ ]?[a-zA-Z]*/)
             ) {
               document.getElementById("description").innerHTML = "";
               renderInfo(res.sort(custom_sort), "Address");
             } else if (
               category.value === "Address" &&
-              searchBar.value.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)? [a-zA-Z]*/) &&
+              searchBar.value.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)?[ ]?[a-zA-Z]*/) &&
               check2.checked === true &&
               check1.checked === false
             ) {
               document.getElementById("description").innerHTML = "";
               res = res.sort(custom_sort);
               renderInfo([res[res.length - 1]], "Name");
+              checkComp(res[res.length - 1]);
             } else if (
               category.value === "Address" &&
-              searchBar.value.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)? [a-zA-Z]*/) &&
+              searchBar.value.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)?[ ]?[a-zA-Z]*/) &&
               check2.checked === true &&
               check1.checked === true
             ) {
@@ -367,7 +368,7 @@
               checkComp(res[res.length - 1]);
             } else if (
               category.value === "Address" &&
-              searchBar.value.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)? [a-zA-Z]*/) &&
+              searchBar.value.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)?[ ]?[a-zA-Z]*/) &&
               check2.checked === false &&
               check1.checked === true
             ) {
