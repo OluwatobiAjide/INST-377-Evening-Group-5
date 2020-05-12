@@ -40,26 +40,28 @@ Developer manual:
     `npm nodemon --save`
 
 ## run our application on heroku
-
+1. Make sure add any .env process variables to heroku.
+2.You must have a file called Procfile with content web: npm start.
+3. Attach the github files to heruku with all the important files in a public folder. 
 
 
 ## API we used
 1. leaflet 1.6.0, here is the downloading link: https://leafletjs.com/2019/11/17/leaflet-1.6.0.html
 2. Prince Georges County open data: https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json?$limit=36000'
 3. API end points
-    ..* `app.get` : The GET request, this is to get data from the Prince Georges County dataset
-    ..* `app.post`: this is going to requests the web server accepts the data enclose.
-    ..* `app.put`: we used the put request for update resource on the server, and this is the only request needed in the body inputs.
+    * `app.get` : The GET request, this is to get data from the Prince Georges County dataset
+    * `app.post`: this is going to requests the web server accepts the data enclose.
+    * `app.put`: we used the put request for update resource on the server, and this is the only request needed in the body inputs.
 
  ## The functions
  1. `renderInfo(res, type)`
-    ..* Makes a table version of json data(3 columns) and ammends to to document. 
-    ..* It also adds markers to map
+    * Makes a table version of json data(3 columns) and ammends to to document. 
+    * It also adds markers to map
 2. `getInfo()`
-    ..* The main function that use all the functions above render results based on search bar
+    * The main function that use all the functions above render results based on search bar
 3. `jsonTable(res)`
-    ..* Makes a table version of json data( 2 columns) and ammends to to document.
+    * Makes a table version of json data( 2 columns) and ammends to to document.
 4. `checkComp(res)`
-    ..* Goes through the data of test to change background of document to red or green based compliance
+    * Goes through the data of test to change background of document to red or green based compliance
 5. `custom_sort(a, b)`
-    ..* Custom sort for year
+    * Custom sort for year
