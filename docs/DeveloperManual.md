@@ -46,7 +46,7 @@
 2. install:
    `npm nodemon --save`
 
-## run our application on heroku
+## TO run our application on heroku
 
 1. Make sure add any .env process variables to heroku.
    2.You must have a file called Procfile with content web: npm start.
