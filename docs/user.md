@@ -10,9 +10,9 @@ USER.MD
 3. Green Background means safe restaurant and red means the opposite` 
 
 ##### Caution!
-    Don't search zipcode with full result
-    Make sure to input correct values with associated category
-    Background does not change for all search options` 
+    * Don't search zipcode with full result
+    * Make sure to input correct values with associated category
+    * Background does not change for all search options` 
 
  #### Zip code option: 
  
