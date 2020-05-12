@@ -20,6 +20,6 @@ In our system, we help user to figure our which resturants are safe, and which r
 3. Sometime we messed up the github local file while two group members are pushing to origin together.
 
 * Possible future work directions with this problem --
-1. Make sure that data loads faster for users.
-2. One possible direction is we can enhance the usefulness of our restaurant rater: providing the user more information instead only the restaurant name and their testing result. 
-3. Our restaurant rater will filter for the user to choose the result they want.
+1. Implement the ability for users to submit reviews for restaurants/carry-out/fast food places
+2. Using Get and Post request to add reviews and get reviews on the client and server side.
+3. Add autocomplete to search bar
