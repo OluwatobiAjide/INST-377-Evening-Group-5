@@ -163,6 +163,10 @@
                 Green Background means safe restaurant and red means the
                 opposite
               </li>
+              <li>
+                Search example: zipcode with safety level->name with safety
+                level->address with safety level or full result
+              </li>
             </ul>
             <h6>Caution!</h6>
             <ul>
@@ -195,8 +199,8 @@
             "pk.eyJ1IjoidGFqaWRlIiwiYSI6ImNrOTdtaGl3MjA4MzEzZXByMjRzNWh3ZGEifQ.vVqCrdfxdkQ_XFENH2v7CA",
         }
       ).addTo(mymap);
-   
-   /*Custom sort for year*/
+
+      /*Custom sort for year*/
       function custom_sort(a, b) {
         return (
           new Date(a.inspection_date).getFullYear() -
@@ -280,7 +284,9 @@
         table.appendChild(thead);
         for (key in res) {
           var tr = document.createElement("tr");
-           theMarker = L.marker(swap(res[key].geocoded_column_1.coordinates)).bindPopup(res[key].name);
+          theMarker = L.marker(
+            swap(res[key].geocoded_column_1.coordinates)
+          ).bindPopup(res[key].name);
           groups.push(theMarker);
           const name =
             type === "Name" ? res[key].name : res[key].address_line_1;
@@ -300,8 +306,8 @@
 
           table.appendChild(tbody);
         }
-       markers = L.layerGroup(groups).addTo(mymap);
-      
+        markers = L.layerGroup(groups).addTo(mymap);
+
         document.getElementById("description").appendChild(table);
       }
       /*The main function that use all the functions above render results based on search bar*/
@@ -341,13 +347,17 @@
               check2.checked === true &&
               check1.checked === false &&
               !searchBar.value.match(/^\d{5}$/) &&
-              !searchBar.value.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)?[ ]?[a-zA-Z]*/)
+              !searchBar.value.match(
+                /(\d{1,}) [a-zA-Z0-9\s]+(\.)?[ ]?[a-zA-Z]*/
+              )
             ) {
               document.getElementById("description").innerHTML = "";
               renderInfo(res.sort(custom_sort), "Address");
             } else if (
               category.value === "Address" &&
-              searchBar.value.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)?[ ]?[a-zA-Z]*/) &&
+              searchBar.value.match(
+                /(\d{1,}) [a-zA-Z0-9\s]+(\.)?[ ]?[a-zA-Z]*/
+              ) &&
               check2.checked === true &&
               check1.checked === false
             ) {
@@ -357,7 +367,9 @@
               checkComp(res[res.length - 1]);
             } else if (
               category.value === "Address" &&
-              searchBar.value.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)?[ ]?[a-zA-Z]*/) &&
+              searchBar.value.match(
+                /(\d{1,}) [a-zA-Z0-9\s]+(\.)?[ ]?[a-zA-Z]*/
+              ) &&
               check2.checked === true &&
               check1.checked === true
             ) {
@@ -368,7 +380,9 @@
               checkComp(res[res.length - 1]);
             } else if (
               category.value === "Address" &&
-              searchBar.value.match(/(\d{1,}) [a-zA-Z0-9\s]+(\.)?[ ]?[a-zA-Z]*/) &&
+              searchBar.value.match(
+                /(\d{1,}) [a-zA-Z0-9\s]+(\.)?[ ]?[a-zA-Z]*/
+              ) &&
               check2.checked === false &&
               check1.checked === true
             ) {
