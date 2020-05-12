@@ -34,16 +34,16 @@ Link:"https://data.princegeorgescountymd.gov/Health/Food-Inspection/umjn-t2iz"
 
 
 ## How our final system helps to address the problem 
-`In our system, we help user to figure our which resturants are safe, and which resturants are dangerous. When user want to choose a resturant to have meal, they can zip code, resturant address, and resturants' name to search the result. And the result will show them those resturants' different safty level.`
+`In our system, we help the user to figure out which restaurants are safe, and which restaurants are dangerous. When the user wants to choose a restaurant to have a meal, they can zip code, restaurant address, and restaurants' name to search the result. And the result will show them those restaurants' different safety levels.`
 
 
-## Challenges faced and impact on final design 
-1. Our searching section separate into three category(zip code, city, and restaurant name), now we only have the zip code search completed.
-2. sqlite failures
-3. Sometime we messed up the github local file while two group members are pushing to origin together.
+## Challenges faced and impact on the final design 
+1. Our searching section separates into three categories (zip code, city, and restaurant name), now we only have the zip code search completed.
+2. SQLite failures
+3. Sometimes we messed up the GitHub local file while two group members are pushing to origin together.
 
 
 ## Possible future work directions with this problem 
 1. Implement the ability for users to submit reviews for restaurants/carry-out/fast food places
-2. Using Get and Post request to add reviews and get reviews on the client and server side.
+2. Using Get and Post request to add reviews and get reviews on the client and server-side.
 3. Add autocomplete to search bar
