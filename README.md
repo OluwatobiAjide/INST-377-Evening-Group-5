@@ -8,16 +8,16 @@ Nowadays, more and more people concern about food safety. People who are concern
 
 ## Link to Application:
 
--- https://rater-restaurant.herokuapp.com/
+https://rater-restaurant.herokuapp.com/
 
 ## Description of target browsers:
 
--- IOS,Android, and laptop browsers
+IOS,Android, and laptop browsers
 
 ## Link to User Manual:
 
--- https://github.com/OluwatobiAjide/INST-377-Evening-Group-5/blob/master/docs/user.md
+https://github.com/OluwatobiAjide/INST-377-Evening-Group-5/blob/master/docs/user.md
 
 ## Link to Developer Manual:
 
--- https://github.com/OluwatobiAjide/INST-377-Evening-Group-5/blob/master/docs/DeveloperManual.md
+https://github.com/OluwatobiAjide/INST-377-Evening-Group-5/blob/master/docs/DeveloperManual.md
